@@ -25,3 +25,5 @@ dist-ssr
 
 #misc
 .env
+
+.src/firebase-config.jsx
