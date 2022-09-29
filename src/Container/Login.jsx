@@ -3,7 +3,21 @@ import React from "react";
 import { Image } from "@chakra-ui/react";
 import MusicBg from "../assets/musicbg.jpg";
 import { FcGoogle } from "react-icons/fc";
+
+import { firebaseApp } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+// ---------APP-----------------
 const Login = () => {
+  const navigate = useNavigate();
+  const auth = getAuth(firebaseApp);
+  const provider = new GoogleAuthProvider();
+  // -------------Login Function----------
+  const handleLogin = async () => {
+    const response = await signInWithPopup(auth, provider);
+    console.log(response);
+  };
+
   return (
     <Flex
       justifyContent={"center"}
@@ -28,6 +42,9 @@ const Login = () => {
             leftIcon={<FcGoogle fontSize={25} />}
             colorScheme={"whiteAlpha"}
             shadow={"lg"}
+            onClick={() => {
+              handleLogin();
+            }}
           >
             SignIn with Google
           </Button>
