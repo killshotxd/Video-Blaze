@@ -32,6 +32,7 @@ const Login = () => {
       providerData[0]
     );
 
+    //-----
     navigate("/", { replace: true });
   };
 
