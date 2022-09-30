@@ -8,12 +8,14 @@ import { firebaseApp } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
+import { doc, getFirestore, setDoc } from "firebase/firestore";
+
 // ---------APP-----------------
 const Login = () => {
   const navigate = useNavigate();
   const auth = getAuth(firebaseApp);
   const provider = new GoogleAuthProvider();
-
+  const firebaseDb = getFirestore(firebaseApp);
   // -------------Login Function----------
   const handleLogin = async () => {
     const { user } = await signInWithPopup(auth, provider);
@@ -22,6 +24,15 @@ const Login = () => {
     // -------STORING refresh token and provider data  in local storage--------
     localStorage.setItem("user", JSON.stringify(providerData));
     localStorage.setItem("accessToken", JSON.stringify(refreshToken));
+
+    // ----SAVING DETAILS TO FIRESTORE---------
+
+    await setDoc(
+      doc(firebaseDb, "users", providerData[0].uid),
+      providerData[0]
+    );
+
+    navigate("/", { replace: true });
   };
 
   return (
