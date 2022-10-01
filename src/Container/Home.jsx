@@ -10,6 +10,8 @@ import {
   Search,
 } from "../Components";
 
+import { categories } from "../Data";
+
 const Home = ({ user }) => {
   return (
     <>
@@ -21,7 +23,8 @@ const Home = ({ user }) => {
         alignItems={"center"}
         width="20"
       >
-        <Category />
+        {categories &&
+          categories.map((data) => <Category key={data.id} data={data} />)}
       </Flex>
 
       <Flex width={"full"} justifyContent="center" alignItems={"center"} px="4">
