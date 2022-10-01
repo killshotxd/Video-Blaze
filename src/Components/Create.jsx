@@ -6,11 +6,13 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
+import { categories } from "../Data";
 import Category from "./Category";
 
 const Create = () => {
@@ -62,15 +64,30 @@ const Create = () => {
           my={4}
         >
           <Menu>
-            <MenuButton as={Button} rightIcon={<IoChevronDown />}>
+            <MenuButton
+              width={"full"}
+              colorScheme="blue"
+              as={Button}
+              rightIcon={<IoChevronDown fontSize={25} />}
+            >
               {Category}
             </MenuButton>
-            <MenuList>
-              <MenuItem>Download</MenuItem>
-              <MenuItem>Create a Copy</MenuItem>
-              <MenuItem>Mark as Draft</MenuItem>
-              <MenuItem>Delete</MenuItem>
-              <MenuItem>Attend a Workshop</MenuItem>
+            <MenuList zIndex={101} width="md" shadow={"xl"}>
+              {categories &&
+                categories.map((data) => (
+                  <MenuItem
+                    key={data.id}
+                    _hover={{ bg: "blackAlpha.300" }}
+                    fontSize={20}
+                    px={4}
+                    onClick={() => setCategory(data.name)}
+                  >
+                    {data.iconSrc}{" "}
+                    <Text fontSize={18} ml={4}>
+                      {data.name}
+                    </Text>
+                  </MenuItem>
+                ))}
             </MenuList>
           </Menu>
         </Flex>
@@ -80,3 +97,5 @@ const Create = () => {
 };
 
 export default Create;
+
+// 2h:29m
