@@ -1,10 +1,12 @@
-import { Flex, useColorMode, useColorModeValue } from "@chakra-ui/react";
-import React from "react";
+import { Flex, Input, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 const Create = () => {
   const { colorMode } = useColorMode();
   const bg = useColorModeValue("gray.50", "gray.900");
   const textColor = useColorModeValue("gray.900", "gray.50");
+
+  const [title, setTitle] = useState("");
 
   return (
     <Flex
@@ -16,7 +18,7 @@ const Create = () => {
     >
       <Flex
         width={"80%"}
-        height="full"
+        height="100vh"
         border={"1px"}
         borderColor="gray.300"
         borderRadius={"md"}
@@ -25,7 +27,20 @@ const Create = () => {
         alignItems="center"
         justifyContent={"center"}
         gap={2}
-      ></Flex>
+      >
+        <Input
+          variant={"flushed"}
+          placeholder="Title"
+          focusBorderColor="gray.400"
+          isRequired
+          errorBorderColor="red"
+          type={"text"}
+          _placeholder={{ color: "gray.500" }}
+          fontSize={20}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </Flex>
     </Flex>
   );
 };
