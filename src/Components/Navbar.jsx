@@ -2,7 +2,7 @@ import React from "react";
 
 import logo from "../assets/logo.png";
 import logo_dark from "../assets/logo_dark.png";
-import { IoAdd, IoMoon, IoSearch, IoSunny } from "react-icons/io5";
+import { IoAdd, IoLogOut, IoMoon, IoSearch, IoSunny } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Flex,
@@ -13,6 +13,8 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
+
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 const Navbar = ({ user }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -79,6 +81,25 @@ const Navbar = ({ user }) => {
             />
           </Flex>
         </Link>
+
+        <Menu>
+          <MenuButton>
+            <Image
+              src={user?.photoURL}
+              width="40px"
+              height={"40px"}
+              rounded="full"
+            />
+          </MenuButton>
+          <MenuList shadow={"lg"}>
+            <Link to={""}>
+              <MenuItem>My Account</MenuItem>
+            </Link>
+            <MenuItem flexDirection={"row"} alignItems="center" gap={4}>
+              LogOut <IoLogOut fontSize={20} />{" "}
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </Flex>
     </Flex>
   );
