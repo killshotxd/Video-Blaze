@@ -30,6 +30,7 @@ const Create = () => {
 
   const [videoAsset, setVideoAsset] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(1);
 
   return (
     <Flex
@@ -154,7 +155,10 @@ const Create = () => {
                   cursor="pointer"
                 >
                   {loading ? (
-                    <Spinner />
+                    <Spinner
+                      msg={"Uploading your Video..."}
+                      progress={progress}
+                    />
                   ) : (
                     <>
                       <IoCloudUpload
@@ -168,6 +172,15 @@ const Create = () => {
                   )}
                 </Flex>
               </Flex>
+              {!loading && (
+                <input
+                  type={"file"}
+                  name="upload"
+                  onChange={() => {}}
+                  style={{ width: 0, height: 0 }}
+                  accept="video/mp4,video/x-m4v,video/*"
+                />
+              )}
             </FormLabel>
           ) : (
             <Box>Something</Box>
