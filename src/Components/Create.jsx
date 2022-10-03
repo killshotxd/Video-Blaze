@@ -40,6 +40,7 @@ import { doc, getFirestore, setDoc, snapshotEqual } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import AlertMsg from "./AlertMsg";
 import { async } from "@firebase/util";
+import { fetchUser } from "../utils/fetchUser";
 
 const Create = () => {
   // DEfaults---------------------
@@ -67,6 +68,9 @@ const Create = () => {
 
   // -------------INITIALIZATION & FUNCTIONS-------
   const storage = getStorage(firebaseApp);
+  const firebaseDb = getFirestore(firebaseApp);
+  const [userInfo] = fetchUser();
+  const navigate = useNavigate();
 
   const uploadImage = (e) => {
     setLoading(true);
@@ -129,6 +133,30 @@ const Create = () => {
   const uploadDetails = async () => {
     try {
       setLoading(true);
+      if (!title && !Category && !videoAsset) {
+        setAlert(true);
+        setAlertStatus("error");
+        setAlertIcon(<IoWarning fontSize={20} />);
+        setAlertMsg("Required fields are missing!");
+        setTimeout(() => {
+          setAlert(false);
+        }, 4000);
+        setLoading(false);
+      } else {
+        const data = {
+          id: `${Date.now()}`,
+          title: title,
+          userId: userInfo?.uid,
+          category: Category,
+          location: location,
+          videoUrl: videoAsset,
+          description: description,
+        };
+
+        await setDoc(doc(firebaseDb, "videos", `${Date.now()}`), data);
+        setLoading(false);
+        navigate("/", { replace: true });
+      }
     } catch (error) {
       console.log(error);
     }
