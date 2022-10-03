@@ -14,7 +14,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { IoChevronDown, IoLocation } from "react-icons/io5";
+import { IoChevronDown, IoCloudUpload, IoLocation } from "react-icons/io5";
 import { categories } from "../Data";
 import Category from "./Category";
 
@@ -28,6 +28,7 @@ const Create = () => {
   const [location, setLocation] = useState("");
 
   const [videoAsset, setVideoAsset] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Flex
@@ -151,7 +152,19 @@ const Create = () => {
                   width={"full"}
                   cursor="pointer"
                 >
-                  hi
+                  {loading ? (
+                    <></>
+                  ) : (
+                    <>
+                      <IoCloudUpload
+                        fontSize={30}
+                        color={`${colorMode == "dark" ? "#f1f1f1" : "#111"}`}
+                      />
+                      <Text mt={5} fontSize={20} color={textColor}>
+                        Click to upload
+                      </Text>
+                    </>
+                  )}
                 </Flex>
               </Flex>
             </FormLabel>
