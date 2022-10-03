@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   FormLabel,
@@ -19,6 +20,18 @@ import { categories } from "../Data";
 import Category from "./Category";
 import Spinner from "./Spinner";
 
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import { firebaseApp } from "../firebase-config";
+
+import { doc, getFirestore, setDoc, snapshotEqual } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+
 const Create = () => {
   const { colorMode } = useColorMode();
   const bg = useColorModeValue("gray.50", "gray.900");
@@ -32,8 +45,32 @@ const Create = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(1);
 
+  const storage = getStorage(firebaseApp);
+
   const uploadImage = (e) => {
-    console.log(e.target.files[0]);
+    setLoading(true);
+    const videoFile = e.target.files[0];
+    const storageRef = ref(storage, `Videos/${Date.now()}-${videoFile.name}`);
+
+    const uploadTask = uploadBytesResumable(storageRef, videoFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const uploadProgress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(uploadProgress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setVideoAsset(downloadURL);
+          setLoading(false);
+        });
+      }
+    );
   };
 
   return (
