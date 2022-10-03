@@ -1,6 +1,7 @@
 import {
   Button,
   Flex,
+  FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
@@ -25,6 +26,8 @@ const Create = () => {
   const [title, setTitle] = useState("");
   const [Category, setCategory] = useState("Choose a Category");
   const [location, setLocation] = useState("");
+
+  const [videoAsset, setVideoAsset] = useState(null);
 
   return (
     <Flex
@@ -118,6 +121,44 @@ const Create = () => {
             />
           </InputGroup>
         </Flex>
+
+        {/* File Selection */}
+
+        <Flex
+          border={"1px"}
+          borderColor="gray.500"
+          height={"400px"}
+          borderStyle="dashed"
+          borderRadius={"md"}
+          width="full"
+          overflow="hidden"
+          position={"relative"}
+        >
+          {!videoAsset ? (
+            <FormLabel width={"full"}>
+              <Flex
+                direction={"column"}
+                alignItems="center"
+                justifyContent={"center"}
+                height="full"
+                width={"full"}
+              >
+                <Flex
+                  direction={"column"}
+                  alignItems="center"
+                  justifyContent={"center"}
+                  height="full"
+                  width={"full"}
+                  cursor="pointer"
+                >
+                  hi
+                </Flex>
+              </Flex>
+            </FormLabel>
+          ) : (
+            <Box>Something</Box>
+          )}
+        </Flex>
       </Flex>
     </Flex>
   );
@@ -125,4 +166,4 @@ const Create = () => {
 
 export default Create;
 
-// 2h:29m
+// 2h:32m
