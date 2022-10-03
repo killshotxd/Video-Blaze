@@ -120,9 +120,14 @@ const Create = () => {
       });
   };
 
-  // useEffect(() => {
-  //   console.log(videoAsset);
-  // }, [videoAsset]);
+  const getDescriptionValue = (e) => {
+    console.log(e.target.value);
+    setDescription(e.target.value);
+  };
+
+  const uploadDetails = () => {};
+
+  useEffect(() => {}, [title, description, location, Category]);
 
   // -------------INITIALIZATION & FUNCTIONS-------
 
@@ -151,7 +156,6 @@ const Create = () => {
         {alert && (
           <AlertMsg status={alertStatus} msg={alertMsg} icon={alertIcon} />
         )}
-
         <Input
           variant={"flushed"}
           placeholder="Title"
@@ -164,7 +168,6 @@ const Create = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-
         <Flex
           justifyContent={"space-between"}
           width="full"
@@ -224,9 +227,7 @@ const Create = () => {
             />
           </InputGroup>
         </Flex>
-
         {/* File Selection */}
-
         <Flex
           border={"1px"}
           borderColor="gray.500"
@@ -315,6 +316,27 @@ const Create = () => {
             </Flex>
           )}
         </Flex>
+        <Input
+          height={100}
+          width="full"
+          onChange={getDescriptionValue}
+          bg={bg}
+          placeholder="Enter Description"
+          fontSize={20}
+        />
+
+        <Button
+          isLoading={loading}
+          loadingText="Uploading"
+          colorScheme={"linkedin"}
+          variant={`${loading ? "outline" : "solid"}`}
+          width="xl"
+          _hover={{ shadow: "lg" }}
+          fontSize={20}
+          onClick={() => uploadDetails()}
+        >
+          Upload
+        </Button>
       </Flex>
     </Flex>
   );
