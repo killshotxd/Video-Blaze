@@ -32,6 +32,10 @@ const Create = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(1);
 
+  const uploadImage = (e) => {
+    console.log(e.target.files[0]);
+  };
+
   return (
     <Flex
       justifyContent={"center"}
@@ -176,7 +180,7 @@ const Create = () => {
                 <input
                   type={"file"}
                   name="upload"
-                  onChange={() => {}}
+                  onChange={uploadImage}
                   style={{ width: 0, height: 0 }}
                   accept="video/mp4,video/x-m4v,video/*"
                 />
