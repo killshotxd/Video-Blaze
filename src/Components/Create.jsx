@@ -14,7 +14,7 @@ import {
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoChevronDown, IoCloudUpload, IoLocation } from "react-icons/io5";
 import { categories } from "../Data";
 import Category from "./Category";
@@ -72,6 +72,10 @@ const Create = () => {
       }
     );
   };
+
+  useEffect(() => {
+    console.log(videoAsset);
+  }, [videoAsset]);
 
   return (
     <Flex
