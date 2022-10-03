@@ -17,6 +17,7 @@ import React, { useState } from "react";
 import { IoChevronDown, IoCloudUpload, IoLocation } from "react-icons/io5";
 import { categories } from "../Data";
 import Category from "./Category";
+import Spinner from "./Spinner";
 
 const Create = () => {
   const { colorMode } = useColorMode();
@@ -153,7 +154,7 @@ const Create = () => {
                   cursor="pointer"
                 >
                   {loading ? (
-                    <></>
+                    <Spinner />
                   ) : (
                     <>
                       <IoCloudUpload

@@ -33,7 +33,6 @@ const Home = ({ user }) => {
           px={4}
           justifyContent="center"
           alignItems={"center"}
-          px={4}
         >
           <Routes>
             <Route path="/" element={<Feed />} />
