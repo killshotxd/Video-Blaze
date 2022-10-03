@@ -39,6 +39,7 @@ import { firebaseApp } from "../firebase-config";
 import { doc, getFirestore, setDoc, snapshotEqual } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import AlertMsg from "./AlertMsg";
+import { async } from "@firebase/util";
 
 const Create = () => {
   // DEfaults---------------------
@@ -125,7 +126,15 @@ const Create = () => {
     setDescription(e.target.value);
   };
 
-  const uploadDetails = () => {};
+  const uploadDetails = async () => {
+    try {
+      setLoading(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 3h33m
 
   useEffect(() => {}, [title, description, location, Category]);
 
