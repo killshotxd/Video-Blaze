@@ -15,7 +15,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { IoChevronDown, IoCloudUpload, IoLocation } from "react-icons/io5";
+import {
+  IoChevronDown,
+  IoCloudUpload,
+  IoLocation,
+  IoTrash,
+} from "react-icons/io5";
 import { categories } from "../Data";
 import Category from "./Category";
 import Spinner from "./Spinner";
@@ -73,9 +78,9 @@ const Create = () => {
     );
   };
 
-  useEffect(() => {
-    console.log(videoAsset);
-  }, [videoAsset]);
+  // useEffect(() => {
+  //   console.log(videoAsset);
+  // }, [videoAsset]);
 
   return (
     <Flex
@@ -228,7 +233,36 @@ const Create = () => {
               )}
             </FormLabel>
           ) : (
-            <Box>Something</Box>
+            <Flex
+              width={"full"}
+              height={"full"}
+              justifyContent="center"
+              alignItems={"center"}
+              bg="black"
+              position="relative"
+            >
+              <Flex
+                justifyContent={"center"}
+                alignItems={"center"}
+                width={"40px"}
+                height={"40px"}
+                rounded="full"
+                bg={"red"}
+                top={5}
+                right={5}
+                position={"absolute"}
+                cursor={"pointer"}
+                zIndex={10}
+                // onClick={deleteImage}
+              >
+                <IoTrash fontSize={20} color="white" />
+              </Flex>
+              <video
+                src={videoAsset}
+                controls
+                style={{ width: "100%", height: "100%" }}
+              />
+            </Flex>
           )}
         </Flex>
       </Flex>
