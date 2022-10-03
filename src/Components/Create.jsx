@@ -327,6 +327,7 @@ const Create = () => {
 
         <Button
           isLoading={loading}
+          marginTop={5}
           loadingText="Uploading"
           colorScheme={"linkedin"}
           variant={`${loading ? "outline" : "solid"}`}
