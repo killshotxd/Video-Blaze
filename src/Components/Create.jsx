@@ -78,6 +78,17 @@ const Create = () => {
     );
   };
 
+  const deleteImage = () => {
+    const deleteRef = ref(storage, videoAsset);
+    deleteObject(deleteRef)
+      .then(() => {
+        setVideoAsset(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // useEffect(() => {
   //   console.log(videoAsset);
   // }, [videoAsset]);
@@ -253,7 +264,7 @@ const Create = () => {
                 position={"absolute"}
                 cursor={"pointer"}
                 zIndex={10}
-                // onClick={deleteImage}
+                onClick={deleteImage}
               >
                 <IoTrash fontSize={20} color="white" />
               </Flex>
