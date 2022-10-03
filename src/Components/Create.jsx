@@ -16,10 +16,12 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
+  IoCheckmark,
   IoChevronDown,
   IoCloudUpload,
   IoLocation,
   IoTrash,
+  IoWarning,
 } from "react-icons/io5";
 import { categories } from "../Data";
 import Category from "./Category";
@@ -36,11 +38,16 @@ import { firebaseApp } from "../firebase-config";
 
 import { doc, getFirestore, setDoc, snapshotEqual } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import AlertMsg from "./AlertMsg";
 
 const Create = () => {
+  // DEfaults---------------------
+
   const { colorMode } = useColorMode();
   const bg = useColorModeValue("gray.50", "gray.900");
   const textColor = useColorModeValue("gray.900", "gray.50");
+
+  // ------------States----------------------------
 
   const [title, setTitle] = useState("");
   const [Category, setCategory] = useState("Choose a Category");
@@ -49,7 +56,15 @@ const Create = () => {
   const [videoAsset, setVideoAsset] = useState(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(1);
+  const [alert, setAlert] = useState(false);
+  const [alertStatus, setAlertStatus] = useState("");
+  const [alertIcon, setAlertIcon] = useState(null);
+  const [alertMsg, setAlertMsg] = useState("");
+  const [description, setDescription] = useState("");
 
+  // ------------States----------------------------
+
+  // -------------INITIALIZATION & FUNCTIONS-------
   const storage = getStorage(firebaseApp);
 
   const uploadImage = (e) => {
@@ -73,6 +88,14 @@ const Create = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setVideoAsset(downloadURL);
           setLoading(false);
+          setAlert(true);
+          setAlertStatus("success");
+          setAlertIcon(<IoCheckmark fontSize={20} />);
+          setAlertMsg("Your video is successfully uploaded to our server.");
+
+          setTimeout(() => {
+            setAlert(false);
+          }, 4000);
         });
       }
     );
@@ -83,6 +106,14 @@ const Create = () => {
     deleteObject(deleteRef)
       .then(() => {
         setVideoAsset(null);
+        setAlert(true);
+        setAlertStatus("error");
+        setAlertIcon(<IoWarning fontSize={20} />);
+        setAlertMsg("Your video is successfully removed from our server!");
+
+        setTimeout(() => {
+          setAlert(false);
+        }, 4000);
       })
       .catch((error) => {
         console.log(error);
@@ -92,6 +123,10 @@ const Create = () => {
   // useEffect(() => {
   //   console.log(videoAsset);
   // }, [videoAsset]);
+
+  // -------------INITIALIZATION & FUNCTIONS-------
+
+  // ----------MAIN APP --------------------------
 
   return (
     <Flex
@@ -113,6 +148,10 @@ const Create = () => {
         justifyContent={"center"}
         gap={2}
       >
+        {alert && (
+          <AlertMsg status={alertStatus} msg={alertMsg} icon={alertIcon} />
+        )}
+
         <Input
           variant={"flushed"}
           placeholder="Title"
@@ -282,5 +321,3 @@ const Create = () => {
 };
 
 export default Create;
-
-// 2h:32m
