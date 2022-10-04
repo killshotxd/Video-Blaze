@@ -41,7 +41,7 @@ const VideoPin = ({ data }) => {
       position="relative"
       maxWidth={"300px"}
     >
-      <Link to={""}>
+      <Link to={`/videoDetail/${data?.id}`}>
         <video
           src={data.videoUrl}
           muted
@@ -67,7 +67,19 @@ const VideoPin = ({ data }) => {
             {data.title}
           </Text>
 
-          <Image src={userInfo?.photoURL} />
+          <Link to={""}>
+            <Image
+              src={userInfo?.photoURL}
+              rounded="full"
+              width={"50px"}
+              height={"50px"}
+              border="2px"
+              borderColor={bg}
+              mt={-10}
+              minHeight="50px"
+              minWidth={"50px"}
+            />
+          </Link>
         </Flex>
       </Flex>
     </Flex>

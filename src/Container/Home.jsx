@@ -8,6 +8,7 @@ import {
   Navbar,
   VideoPin,
   Search,
+  VideoPinDetail,
 } from "../Components";
 
 import { categories } from "../Data";
@@ -38,7 +39,7 @@ const Home = ({ user }) => {
             <Route path="/" element={<Feed />} />
             <Route path="/category/:categoryId" element={<Feed />} />
             <Route path="/create" element={<Create />} />
-            <Route path="/videoDetail/:videoId" element={<VideoPin />} />
+            <Route path="/videoDetail/:videoId" element={<VideoPinDetail />} />
             <Route path="/search" element={<Search />} />
           </Routes>
         </Flex>
