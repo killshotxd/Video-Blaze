@@ -11,6 +11,10 @@ import { getUserInfo } from "../Utils/FetchData";
 import { getFirestore } from "firebase/firestore";
 import { firebaseApp } from "../firebase-config";
 import moment from "moment/moment";
+
+const avatar =
+  "https://ak.picdn.net/contributors/3038285/avatars/thumb.jpg?t=164360626";
+
 const VideoPin = ({ data }) => {
   const { colorMode } = useColorMode();
   const bg = useColorModeValue("blackAlpha.700", "gray.900");
@@ -70,7 +74,7 @@ const VideoPin = ({ data }) => {
 
           <Link to={`/userDetail/${userId}`}>
             <Image
-              src={userInfo?.photoURL}
+              src={userInfo?.photoURL ? userInfo?.photoURL : avatar}
               rounded="full"
               width={"50px"}
               height={"50px"}
