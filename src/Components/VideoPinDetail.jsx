@@ -1,4 +1,10 @@
-import { Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { IoHome } from "react-icons/io5";
@@ -8,10 +14,11 @@ import { getSpecificVideo } from "../Utils/FetchData";
 import Spinner from "./Spinner";
 
 const VideoPinDetail = () => {
+  const textColor = useColorModeValue("gray.900", "gray.50");
   const { videoId } = useParams();
   const firestoreDb = getFirestore(firebaseApp);
   const [isLoading, setIsLoading] = useState(false);
-  const [videoInfo, setVideoInfo] = useState(null);
+  const [videoInfo, setVideoInfo] = useState("");
 
   useEffect(() => {
     if (videoId) {
@@ -19,7 +26,6 @@ const VideoPinDetail = () => {
       getSpecificVideo(firestoreDb, videoId).then((data) => {
         setVideoInfo(data);
         setIsLoading(false);
-        console.log(data);
       });
     }
   }, [videoId]);
@@ -40,9 +46,15 @@ const VideoPinDetail = () => {
         <Link to={"/"}>
           <IoHome fontSize={25} />
         </Link>
+        <Box width={"1px"} height="25px" bg={"gray.500"} mx={2}></Box>
+        <Text color={textColor} fontWeight="semibold" width={"100%"}>
+          {videoInfo.title}
+        </Text>
       </Flex>
     </Flex>
   );
 };
 
 export default VideoPinDetail;
+
+// 1h19m

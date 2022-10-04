@@ -68,7 +68,7 @@ const VideoPin = ({ data }) => {
           justifyContent="space-between"
           alignItems={"center"}
         >
-          <Text color={textColor} isTruncated fontSize={20}>
+          <Text color={textColor} fontSize={20}>
             {data.title}
           </Text>
 
