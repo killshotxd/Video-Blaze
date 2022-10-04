@@ -91,5 +91,3 @@ const VideoPin = ({ data }) => {
 };
 
 export default VideoPin;
-
-// 51m
