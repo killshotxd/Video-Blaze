@@ -126,7 +126,6 @@ const Create = () => {
   };
 
   const getDescriptionValue = (e) => {
-    console.log(e.target.value);
     setDescription(e.target.value);
   };
 
