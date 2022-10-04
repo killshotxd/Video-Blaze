@@ -35,7 +35,7 @@ const Feed = () => {
     >
       {feeds &&
         feeds.map((data) => (
-          <VideoPin key={data.id} maxWidth={420} height="80px" />
+          <VideoPin key={data.id} maxWidth={420} height="80px" data={data} />
         ))}
     </SimpleGrid>
   );
