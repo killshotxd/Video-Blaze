@@ -67,7 +67,7 @@ const VideoPin = ({ data }) => {
             {data.title}
           </Text>
 
-          <Link to={""}>
+          <Link to={`/userDetail/${userId}`}>
             <Image
               src={userInfo?.photoURL}
               rounded="full"
@@ -87,3 +87,5 @@ const VideoPin = ({ data }) => {
 };
 
 export default VideoPin;
+
+// 51m
