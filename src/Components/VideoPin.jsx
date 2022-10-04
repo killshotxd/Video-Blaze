@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { getUserInfo } from "../Utils/FetchData";
 import { getFirestore } from "firebase/firestore";
 import { firebaseApp } from "../firebase-config";
+import moment from "moment/moment";
 const VideoPin = ({ data }) => {
   const { colorMode } = useColorMode();
   const bg = useColorModeValue("blackAlpha.700", "gray.900");
@@ -81,6 +82,9 @@ const VideoPin = ({ data }) => {
             />
           </Link>
         </Flex>
+        <Text fontSize={12} color={textColor} ml="auto">
+          {moment(new Date(parseInt(data.id)).toISOString()).fromNow()}
+        </Text>
       </Flex>
     </Flex>
   );
