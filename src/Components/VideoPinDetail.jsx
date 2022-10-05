@@ -12,6 +12,7 @@ import {
   useColorMode,
   useColorModeValue,
   Button,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
@@ -20,7 +21,7 @@ import { FcApproval } from "react-icons/fc";
 import ReactPlayer from "react-player";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
-import { getSpecificVideo, getUserInfo } from "../Utils/FetchData";
+import { deleteVideo, getSpecificVideo, getUserInfo } from "../Utils/FetchData";
 import Spinner from "./Spinner";
 import {
   Popover,
@@ -150,6 +151,14 @@ const VideoPinDetail = () => {
 
   const elapsedTime = format(currentTime);
   const totalDuration = format(duration);
+
+  const deleteTheVideo = (videoId) => {
+    setIsLoading(true);
+    deleteVideo(firestoreDb, videoId);
+    setIsLoading(false);
+
+    navigate("/", { replace: "true" });
+  };
 
   if (isLoading) return <Spinner />;
 
@@ -412,7 +421,12 @@ const VideoPinDetail = () => {
                       </PopoverBody>
                       <PopoverFooter display="flex" justifyContent="flex-end">
                         <ButtonGroup size="sm">
-                          <Button colorScheme="red">Yes</Button>
+                          <Button
+                            colorScheme="red"
+                            onClick={() => deleteTheVideo(videoId)}
+                          >
+                            Yes
+                          </Button>
                         </ButtonGroup>
                       </PopoverFooter>
                     </PopoverContent>
