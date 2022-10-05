@@ -27,6 +27,12 @@ body::-webkit-scrollbar {
   .css-1xhf4ur {
     flex-direction: column !important;
   }
+  .css-p5b94h {
+    grid-gap: 40px !important;
+  }
+  .css-3f901z {
+    gap: 2rem !important;
+  }
 }
 
 @media screen and (max-width: 635px) {
@@ -35,5 +41,14 @@ body::-webkit-scrollbar {
   }
   .css-70qvj9 svg {
     font-size: 10px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .css-1u8zdct a svg {
+    font-size: 20px !important;
+  }
+  .css-1o9g0p {
+    width: 115px !important;
   }
 }
