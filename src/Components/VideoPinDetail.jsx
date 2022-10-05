@@ -54,6 +54,14 @@ const VideoPinDetail = () => {
     }
   }, [videoId]);
 
+  useEffect(() => {}, [muted, volume]);
+
+  const onvolumechange = (e) => {
+    setVolume(parseFloat(e / 100));
+
+    e === 0 ? setMuted(true) : setMuted(false);
+  };
+
   if (isLoading) return <Spinner />;
 
   return (
@@ -85,6 +93,7 @@ const VideoPinDetail = () => {
               height={"100%"}
               playing={isPlaying}
               muted={muted}
+              volume={volume}
             />
             {/* Controls for Video Player */}
             <Flex
@@ -199,6 +208,8 @@ const VideoPinDetail = () => {
                       size="sm"
                       width={16}
                       mx={2}
+                      onChangeStart={onvolumechange}
+                      onChangeEnd={onvolumechange}
                     >
                       <SliderTrack bg={"teal.50"}>
                         <SliderFilledTrack bg={"teal.300"} />
