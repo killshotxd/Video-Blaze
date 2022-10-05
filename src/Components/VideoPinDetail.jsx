@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { IoHome } from "react-icons/io5";
+import { IoHome, IoPlay } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import { Link, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
@@ -22,6 +22,13 @@ const VideoPinDetail = () => {
   const firestoreDb = getFirestore(firebaseApp);
   const [isLoading, setIsLoading] = useState(false);
   const [videoInfo, setVideoInfo] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const [volume, setVolume] = useState(0.5);
+  const [played, setPlayed] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const [feeds, setFeeds] = useState(null);
 
   useEffect(() => {
     if (videoId) {
@@ -62,7 +69,36 @@ const VideoPinDetail = () => {
               url={videoInfo?.videoUrl}
               width="100%"
               height={"100%"}
+              playing={isPlaying}
             />
+            {/* Controls for Video Player */}
+            <Flex
+              position={"absolute"}
+              top={0}
+              left={0}
+              right={0}
+              bottom={0}
+              direction="column"
+              justifyContent={"space-between"}
+              alignItems="center"
+              zIndex={1}
+              cursor="pointer"
+            >
+              {/* Play Icon */}
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                onClick={() => {
+                  setIsPlaying(!isPlaying);
+                }}
+                width="full"
+                height={"full"}
+              >
+                {!isPlaying && (
+                  <IoPlay fontSize={60} color="#f2f2f2" cursor={"pointer"} />
+                )}
+              </Flex>
+            </Flex>
           </Flex>
         </GridItem>
         <GridItem width={"100%"} colSpan="1"></GridItem>
