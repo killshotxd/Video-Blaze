@@ -30,6 +30,25 @@ import {
 } from "react-icons/md";
 import logo from "../assets/logo.png";
 
+// Duration format
+const format = (seconds) => {
+  if (isNaN(seconds)) {
+    return "00:00";
+  }
+  const date = new Date(seconds * 1000);
+  const hh = date.getUTCHours();
+  const mm = date.getUTCMinutes();
+  const ss = date.getUTCSeconds().toString().padStart(2, "0");
+
+  if (hh) {
+    return `${hh}:${mm.toString().padStart(2, "0")} : ${ss}`;
+    // 01:02:32
+  }
+
+  return `${mm}: ${ss}`;
+  // 02:33
+};
+
 const VideoPinDetail = () => {
   const textColor = useColorModeValue("gray.900", "gray.50");
   const { videoId } = useParams();
@@ -92,6 +111,14 @@ const VideoPinDetail = () => {
     setSeeking(false);
     playerRef.current.seekTo(e / 100);
   };
+
+  const currentTime = playerRef.current
+    ? playerRef.current.getCurrentTime()
+    : "00:00";
+
+  const duration = playerRef.current
+    ? playerRef.current.getDuration()
+    : "00:00";
 
   if (isLoading) return <Spinner />;
 
