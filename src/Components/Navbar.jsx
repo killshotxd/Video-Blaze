@@ -93,7 +93,7 @@ const Navbar = ({ user }) => {
             />
           </MenuButton>
           <MenuList shadow={"lg"}>
-            <Link to={""}>
+            <Link to={`/userDetail/${user?.uid}`}>
               <MenuItem>My Account</MenuItem>
             </Link>
             <MenuItem

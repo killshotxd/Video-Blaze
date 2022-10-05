@@ -68,3 +68,29 @@ export const recommendedFeed = async (firestoreDb, categoryId, videoId) => {
 
   return feeds.docs.map((doc) => doc.data());
 };
+
+// userUploaded videos
+export const userUploadedVideos = async (firestoreDb, userId) => {
+  const feeds = await getDocs(
+    query(
+      collection(firestoreDb, "videos"),
+      where("userId", "==", userId),
+      orderBy("id", "desc")
+    )
+  );
+
+  return feeds.docs.map((doc) => doc.data());
+};
+
+// Category Wise Feeds
+export const categoryFeeds = async (firestoreDb, categoryId) => {
+  const feeds = await getDocs(
+    query(
+      collection(firestoreDb, "videos"),
+      where("category", "==", categoryId),
+      orderBy("id", "desc")
+    )
+  );
+
+  return feeds.docs.map((doc) => doc.data());
+};

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getFirestore } from "firebase/firestore";
 import { firebaseApp } from "../firebase-config";
-import { getAllFeeds } from "../Utils/FetchData";
+import { categoryFeeds, getAllFeeds } from "../Utils/FetchData";
 import Spinner from "../Components/Spinner";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import VideoPin from "./VideoPin";
+import { useParams } from "react-router-dom";
+import NotFound from "./NotFound";
 const Feed = () => {
   // -------FIRESTORE DB INSTANCE--------
 
@@ -14,15 +16,26 @@ const Feed = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const { categoryId } = useParams();
+
   useEffect(() => {
     setLoading(true);
-    getAllFeeds(firestoreDb).then((data) => {
-      setFeeds(data);
-      setLoading(false);
-    });
-  }, []);
+    if (categoryId) {
+      categoryFeeds(firestoreDb, categoryId).then((data) => {
+        setFeeds(data);
+        setLoading(false);
+      });
+    } else {
+      getAllFeeds(firestoreDb).then((data) => {
+        setFeeds(data);
+        setLoading(false);
+      });
+    }
+  }, [categoryId]);
 
   if (loading) return <Spinner msg={"Loading your feeds...."} />;
+
+  if (!feeds?.length > 0) return <NotFound />;
 
   return (
     <SimpleGrid
