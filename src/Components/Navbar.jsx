@@ -2,7 +2,14 @@ import React from "react";
 
 import logo from "../assets/logo.png";
 import logo_dark from "../assets/logo_dark.png";
-import { IoAdd, IoLogOut, IoMoon, IoSearch, IoSunny } from "react-icons/io5";
+import {
+  IoAdd,
+  IoLogoGithub,
+  IoLogOut,
+  IoMoon,
+  IoSearch,
+  IoSunny,
+} from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Flex,
@@ -28,6 +35,18 @@ const Navbar = ({ user }) => {
       width={"100vw"}
       p="4"
     >
+      <a
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "5px",
+          fontWeight: "bold",
+        }}
+        href="https://github.com/Killshotxd"
+      >
+        <IoLogoGithub fontSize={40} /> Killshotxd
+      </a>
+
       <Link to={"/"}>
         <Image src={colorMode == "light" ? logo_dark : logo} width={"180px"} />
       </Link>
