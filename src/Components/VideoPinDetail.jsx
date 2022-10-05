@@ -11,6 +11,7 @@ import {
   Image,
   useColorMode,
   useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
@@ -21,6 +22,17 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
 import { getSpecificVideo, getUserInfo } from "../Utils/FetchData";
 import Spinner from "./Spinner";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from "@chakra-ui/react";
 
 import {
   MdForward10,
@@ -384,7 +396,28 @@ const VideoPinDetail = () => {
 
               {/* Action Buttons */}
               <Flex justifyContent={"space-around"} mt={6}>
-                {userInfo?.uid === localUser.uid && <IoTrash fontSize={20} />}
+                {userInfo?.uid === localUser.uid && (
+                  <Popover closeOnEsc>
+                    <PopoverTrigger>
+                      <Button colorScheme={"red"}>
+                        <IoTrash fontSize={20} color="#fff" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader>Confirmation!</PopoverHeader>
+                      <PopoverBody>
+                        Are you sure you want to delete current video?
+                      </PopoverBody>
+                      <PopoverFooter display="flex" justifyContent="flex-end">
+                        <ButtonGroup size="sm">
+                          <Button colorScheme="red">Yes</Button>
+                        </ButtonGroup>
+                      </PopoverFooter>
+                    </PopoverContent>
+                  </Popover>
+                )}
               </Flex>
             </Flex>
           )}

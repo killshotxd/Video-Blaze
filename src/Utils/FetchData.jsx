@@ -47,3 +47,9 @@ export const getSpecificVideo = async (firestoreDb, videoId) => {
     return "No Such Document";
   }
 };
+
+// Delete specific Video
+
+export const deleteVideo = async (firestoreDb, videoId) => {
+  await deleteDoc(doc(firestoreDb, "videos", videoId));
+};
