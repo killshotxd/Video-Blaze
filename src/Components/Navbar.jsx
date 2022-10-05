@@ -17,6 +17,7 @@ import {
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 const Navbar = ({ user }) => {
+  const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = useColorModeValue("gray.600", "gray.300");
 
@@ -95,7 +96,15 @@ const Navbar = ({ user }) => {
             <Link to={""}>
               <MenuItem>My Account</MenuItem>
             </Link>
-            <MenuItem flexDirection={"row"} alignItems="center" gap={4}>
+            <MenuItem
+              flexDirection={"row"}
+              alignItems="center"
+              gap={4}
+              onClick={() => {
+                localStorage.clear();
+                navigate("/login", { replace: true });
+              }}
+            >
               LogOut <IoLogOut fontSize={20} />{" "}
             </MenuItem>
           </MenuList>

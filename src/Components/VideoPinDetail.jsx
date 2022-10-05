@@ -14,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
-import { IoHome, IoPause, IoPlay } from "react-icons/io5";
+import { IoHome, IoPause, IoPlay, IoTrash } from "react-icons/io5";
 import { FcApproval } from "react-icons/fc";
 import ReactPlayer from "react-player";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
 import { getSpecificVideo, getUserInfo } from "../Utils/FetchData";
 import Spinner from "./Spinner";
@@ -32,6 +32,7 @@ import {
 import logo from "../assets/logo.png";
 import screenfull from "screenfull";
 import moment from "moment";
+import { fetchUser } from "../utils/fetchUser";
 
 // Duration format
 const format = (seconds) => {
@@ -56,6 +57,10 @@ const avatar =
   "https://ak.picdn.net/contributors/3038285/avatars/thumb.jpg?t=164360626";
 
 const VideoPinDetail = () => {
+  // firestore database instance
+
+  const [localUser] = fetchUser();
+  const navigate = useNavigate();
   const textColor = useColorModeValue("gray.900", "gray.50");
 
   const { videoId } = useParams();
@@ -378,6 +383,9 @@ const VideoPinDetail = () => {
               </Flex>
 
               {/* Action Buttons */}
+              <Flex justifyContent={"space-around"} mt={6}>
+                {userInfo?.uid === localUser.uid && <IoTrash fontSize={20} />}
+              </Flex>
             </Flex>
           )}
         </GridItem>
