@@ -82,6 +82,7 @@ const VideoPinDetail = () => {
               width="100%"
               height={"100%"}
               playing={isPlaying}
+              muted={muted}
             />
             {/* Controls for Video Player */}
             <Flex
@@ -140,7 +141,11 @@ const VideoPinDetail = () => {
                     cursor="pointer"
                   />
 
-                  <Box>
+                  <Box
+                    onClick={() => {
+                      setIsPlaying(!isPlaying);
+                    }}
+                  >
                     {!isPlaying ? (
                       <IoPlay
                         fontSize={30}
@@ -161,6 +166,29 @@ const VideoPinDetail = () => {
                     color={"#f1f1f1"}
                     cursor="pointer"
                   />
+
+                  {/*  Volume Controls*/}
+                  <Flex alignItems={"center"}>
+                    <Box
+                      onClick={() => {
+                        setMuted(!muted);
+                      }}
+                    >
+                      {!muted ? (
+                        <MdVolumeUp
+                          fontSize={30}
+                          color="#f1f1f1"
+                          cursor={"pointer"}
+                        />
+                      ) : (
+                        <MdVolumeOff
+                          fontSize={30}
+                          color="#f1f1f1"
+                          cursor={"pointer"}
+                        />
+                      )}
+                    </Box>
+                  </Flex>
                 </Flex>
               </Flex>
             </Flex>
