@@ -367,7 +367,7 @@ const Create = () => {
           loadingText="Uploading"
           colorScheme={"linkedin"}
           variant={`${loading ? "outline" : "solid"}`}
-          width="xl"
+          width="inherit"
           _hover={{ shadow: "lg" }}
           fontSize={20}
           onClick={() => uploadDetails()}

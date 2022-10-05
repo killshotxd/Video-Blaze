@@ -16,9 +16,16 @@ body::-webkit-scrollbar {
     grid-template-columns: repeat(1, 1fr) !important;
   }
 }
+
 @media screen and (max-width: 740px) {
   .css-1vkmudn {
     margin-left: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .css-1xhf4ur {
+    flex-direction: column !important;
   }
 }
 
