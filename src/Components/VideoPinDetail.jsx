@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoHome, IoPause, IoPlay } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import { Link, useParams } from "react-router-dom";
@@ -44,6 +44,10 @@ const VideoPinDetail = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [feeds, setFeeds] = useState(null);
 
+  // Custom REF
+
+  const playerRef = useRef();
+
   useEffect(() => {
     if (videoId) {
       setIsLoading(true);
@@ -60,6 +64,14 @@ const VideoPinDetail = () => {
     setVolume(parseFloat(e / 100));
 
     e === 0 ? setMuted(true) : setMuted(false);
+  };
+
+  const handleFastRewind = () => {
+    playerRef.current.seekTo(playerRef.current.getCurrentTime() - 10);
+  };
+
+  const handleFastForward = () => {
+    playerRef.current.seekTo(playerRef.current.getCurrentTime() + 10);
   };
 
   if (isLoading) return <Spinner />;
@@ -88,6 +100,7 @@ const VideoPinDetail = () => {
         <GridItem width={"100%"} colSpan="2">
           <Flex width={"full"} bg="black" position={"relative"}>
             <ReactPlayer
+              ref={playerRef}
               url={videoInfo?.videoUrl}
               width="100%"
               height={"100%"}
@@ -150,6 +163,7 @@ const VideoPinDetail = () => {
                     fontSize={30}
                     color={"#f1f1f1"}
                     cursor="pointer"
+                    onClick={handleFastRewind}
                   />
 
                   <Box
@@ -176,6 +190,7 @@ const VideoPinDetail = () => {
                     fontSize={30}
                     color={"#f1f1f1"}
                     cursor="pointer"
+                    onClick={handleFastForward}
                   />
 
                   {/*  Volume Controls*/}
