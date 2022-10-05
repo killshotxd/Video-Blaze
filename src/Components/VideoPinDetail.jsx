@@ -3,6 +3,10 @@ import {
   Flex,
   Grid,
   GridItem,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
   Text,
   useColorMode,
   useColorModeValue,
@@ -97,6 +101,28 @@ const VideoPinDetail = () => {
                 {!isPlaying && (
                   <IoPlay fontSize={60} color="#f2f2f2" cursor={"pointer"} />
                 )}
+              </Flex>
+
+              {/* Progress Controls */}
+
+              <Flex
+                width={"full"}
+                alignItems="center"
+                direction={"column"}
+                px="4"
+                bgGradient="linear(to-t, blackAlpha.900, blackAlpha.500, blackAlpha.50)"
+              >
+                <Slider
+                  aria-label="slider-ex-4"
+                  defaultValue={30}
+                  min={0}
+                  max={100}
+                >
+                  <SliderTrack bg={"teal.50"}>
+                    <SliderFilledTrack bg={"teal.300"} />
+                  </SliderTrack>
+                  <SliderThumb boxSize={3} bg={"teal.300"} />
+                </Slider>
               </Flex>
             </Flex>
           </Flex>
