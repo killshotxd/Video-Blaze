@@ -1,6 +1,8 @@
 import {
   Box,
   Flex,
+  Grid,
+  GridItem,
   Text,
   useColorMode,
   useColorModeValue,
@@ -51,10 +53,13 @@ const VideoPinDetail = () => {
           {videoInfo.title}
         </Text>
       </Flex>
+      {/* Main grid for Video */}
+      <Grid templateColumns="repeat(3, 1fr)" gap={2} width="100%">
+        <GridItem width={"100%"} colSpan="2"></GridItem>
+        <GridItem width={"100%"} colSpan="1"></GridItem>
+      </Grid>
     </Flex>
   );
 };
 
 export default VideoPinDetail;
-
-// 1h19m
