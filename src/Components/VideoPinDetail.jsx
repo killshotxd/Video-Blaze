@@ -80,6 +80,19 @@ const VideoPinDetail = () => {
     }
   };
 
+  const handleSeekChange = (e) => {
+    setPlayed(parseFloat(e / 100));
+  };
+
+  const onSeekMouseDown = (e) => {
+    setSeeking(true);
+  };
+
+  const onSeekMouseUp = (e) => {
+    setSeeking(false);
+    playerRef.current.seekTo(e / 100);
+  };
+
   if (isLoading) return <Spinner />;
 
   return (
@@ -157,11 +170,21 @@ const VideoPinDetail = () => {
                   min={0}
                   max={100}
                   value={played * 100}
+                  transition="ease-in-out"
+                  transitionDelay={"0.2"}
+                  onChange={handleSeekChange}
+                  onMouseDown={onSeekMouseDown}
+                  onChangeEnd={onSeekMouseUp}
                 >
                   <SliderTrack bg={"teal.50"}>
                     <SliderFilledTrack bg={"teal.300"} />
                   </SliderTrack>
-                  <SliderThumb boxSize={3} bg={"teal.300"} />
+                  <SliderThumb
+                    boxSize={3}
+                    bg={"teal.300"}
+                    transition="ease-in-out"
+                    transitionDelay={"0.2"}
+                  />
                 </Slider>
 
                 {/* Other Player Controls */}
