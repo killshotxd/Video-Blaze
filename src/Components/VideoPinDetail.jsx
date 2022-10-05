@@ -10,6 +10,7 @@ import {
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { IoHome } from "react-icons/io5";
+import ReactPlayer from "react-player";
 import { Link, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
 import { getSpecificVideo } from "../Utils/FetchData";
@@ -55,7 +56,15 @@ const VideoPinDetail = () => {
       </Flex>
       {/* Main grid for Video */}
       <Grid templateColumns="repeat(3, 1fr)" gap={2} width="100%">
-        <GridItem width={"100%"} colSpan="2"></GridItem>
+        <GridItem width={"100%"} colSpan="2">
+          <Flex width={"full"} bg="black" position={"relative"}>
+            <ReactPlayer
+              url={videoInfo?.videoUrl}
+              width="100%"
+              height={"100%"}
+            />
+          </Flex>
+        </GridItem>
         <GridItem width={"100%"} colSpan="1"></GridItem>
       </Grid>
     </Flex>
