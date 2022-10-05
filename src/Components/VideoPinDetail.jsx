@@ -15,10 +15,11 @@ import {
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
 import { IoHome, IoPause, IoPlay } from "react-icons/io5";
+import { FcApproval } from "react-icons/fc";
 import ReactPlayer from "react-player";
 import { Link, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
-import { getSpecificVideo } from "../Utils/FetchData";
+import { getSpecificVideo, getUserInfo } from "../Utils/FetchData";
 import Spinner from "./Spinner";
 
 import {
@@ -50,8 +51,12 @@ const format = (seconds) => {
   // 02:33
 };
 
+const avatar =
+  "https://ak.picdn.net/contributors/3038285/avatars/thumb.jpg?t=164360626";
+
 const VideoPinDetail = () => {
   const textColor = useColorModeValue("gray.900", "gray.50");
+
   const { videoId } = useParams();
   const firestoreDb = getFirestore(firebaseApp);
   const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +79,9 @@ const VideoPinDetail = () => {
       setIsLoading(true);
       getSpecificVideo(firestoreDb, videoId).then((data) => {
         setVideoInfo(data);
+        getUserInfo(firestoreDb, data.userId).then((user) => {
+          setUserInfo(user);
+        });
         setIsLoading(false);
       });
     }
@@ -326,8 +334,43 @@ const VideoPinDetail = () => {
               </Flex>
             </Flex>
           </Flex>
+
+          {/* Video Description */}
+
+          {videoInfo?.description && (
+            <Flex my={6} direction="column">
+              <Text my={2} fontSize={25} fontWeight="semibold">
+                Description
+              </Text>
+              {videoInfo.description}
+            </Flex>
+          )}
         </GridItem>
-        <GridItem width={"100%"} colSpan="1"></GridItem>
+        <GridItem width={"100%"} colSpan="1">
+          {userInfo && (
+            <Flex direction={"column"} width="full">
+              <Flex alignItems={"center"} width="full">
+                <Image
+                  src={userInfo?.photoURL ? userInfo?.photoURL : avatar}
+                  rounded="full"
+                  width={"60px"}
+                  height={"60px"}
+                  minHeight="60px"
+                  minWidth={"60px"}
+                />
+
+                <Flex direction={"column"} ml={3}>
+                  <Flex alignItems={"center"}>
+                    <Text color={textColor} fontWeight="semibold">
+                      {userInfo?.displayName}
+                    </Text>
+                    <FcApproval />
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
+          )}
+        </GridItem>
       </Grid>
     </Flex>
   );
