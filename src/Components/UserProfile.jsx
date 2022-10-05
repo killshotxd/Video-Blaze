@@ -7,8 +7,7 @@ import { getUserInfo, userUploadedVideos } from "../utils/FetchData";
 import RecommendedVideos from "./RecommendedVideos";
 import Spinner from "./Spinner";
 
-const randomImage =
-  "https://source.unsplash.com/1600x900/?nature,photography,technology";
+const randomImage = "https://source.unsplash.com/1600x900/?anime,nature,games";
 
 const UserProfile = () => {
   const { userId } = useParams();

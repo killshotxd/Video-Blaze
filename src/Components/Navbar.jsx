@@ -32,7 +32,7 @@ const Navbar = ({ user }) => {
         <Image src={colorMode == "light" ? logo_dark : logo} width={"180px"} />
       </Link>
 
-      <InputGroup mx={6} width={"60vw"}>
+      {/* <InputGroup mx={6} width={"60vw"}>
         <InputLeftAddon children={<IoSearch fontSize={25} />} />
         <Input
           type="text"
@@ -40,8 +40,10 @@ const Navbar = ({ user }) => {
           fontSize={18}
           fontWeight={"medium"}
           variant={"filled"}
+          onChange={(e) => setsearchTerm(e.target.value)}
+          onFocus={() => navigate("/search")}
         />
-      </InputGroup>
+      </InputGroup> */}
 
       <Flex justifyContent={"center"} alignItems="center">
         <Flex

@@ -358,7 +358,7 @@ const VideoPinDetail = () => {
                       {totalDuration}
                     </Text>
                   </Flex>
-                  <Image src={logo} width={"120px"} ml="auto" />
+                  {/* <Image src={logo} width={"120px"} ml="auto" /> */}
 
                   <MdFullscreen
                     fontSize={30}

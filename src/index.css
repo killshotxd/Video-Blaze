@@ -10,3 +10,23 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+
+@media screen and (max-width: 1000px) {
+  .css-st0g4l {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  .css-1vkmudn {
+    margin-left: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 635px) {
+  .css-jnyipw {
+    gap: 4px !important;
+  }
+  .css-70qvj9 svg {
+    font-size: 10px !important;
+  }
+}
