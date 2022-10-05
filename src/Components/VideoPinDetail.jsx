@@ -29,6 +29,7 @@ import {
   MdVolumeUp,
 } from "react-icons/md";
 import logo from "../assets/logo.png";
+import screenfull from "screenfull";
 
 // Duration format
 const format = (seconds) => {
@@ -66,6 +67,7 @@ const VideoPinDetail = () => {
   // Custom REF
 
   const playerRef = useRef();
+  const playerContainer = useRef();
 
   useEffect(() => {
     if (videoId) {
@@ -147,7 +149,12 @@ const VideoPinDetail = () => {
       {/* Main grid for Video */}
       <Grid templateColumns="repeat(3, 1fr)" gap={2} width="100%">
         <GridItem width={"100%"} colSpan="2">
-          <Flex width={"full"} bg="black" position={"relative"}>
+          <Flex
+            width={"full"}
+            bg="black"
+            position={"relative"}
+            ref={playerContainer}
+          >
             <ReactPlayer
               ref={playerRef}
               url={videoInfo?.videoUrl}
@@ -311,7 +318,9 @@ const VideoPinDetail = () => {
                     fontSize={30}
                     color="#f1f1f1"
                     cursor={"pointer"}
-                    onClick={() => {}}
+                    onClick={() => {
+                      screenfull.toggle(playerContainer.current);
+                    }}
                   />
                 </Flex>
               </Flex>
