@@ -58,7 +58,7 @@ const VideoPinDetail = () => {
     }
   }, [videoId]);
 
-  useEffect(() => {}, [muted, volume]);
+  useEffect(() => {}, [muted, volume, played]);
 
   const onvolumechange = (e) => {
     setVolume(parseFloat(e / 100));
@@ -72,6 +72,12 @@ const VideoPinDetail = () => {
 
   const handleFastForward = () => {
     playerRef.current.seekTo(playerRef.current.getCurrentTime() + 10);
+  };
+
+  const handleProgress = (changeState) => {
+    if (!seeking) {
+      setPlayed(parseFloat(changeState.played / 100) * 100);
+    }
   };
 
   if (isLoading) return <Spinner />;
@@ -107,6 +113,7 @@ const VideoPinDetail = () => {
               playing={isPlaying}
               muted={muted}
               volume={volume}
+              onProgress={handleProgress}
             />
             {/* Controls for Video Player */}
             <Flex
@@ -147,9 +154,9 @@ const VideoPinDetail = () => {
               >
                 <Slider
                   aria-label="slider-ex-4"
-                  defaultValue={30}
                   min={0}
                   max={100}
+                  value={played * 100}
                 >
                   <SliderTrack bg={"teal.50"}>
                     <SliderFilledTrack bg={"teal.300"} />
@@ -217,7 +224,7 @@ const VideoPinDetail = () => {
 
                     <Slider
                       aria-label="slider-ex-1"
-                      defaultValue={30}
+                      defaultValue={volume * 100}
                       min={0}
                       max={100}
                       size="sm"
