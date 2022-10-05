@@ -13,12 +13,20 @@ import {
 } from "@chakra-ui/react";
 import { getFirestore } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { IoHome, IoPlay } from "react-icons/io5";
+import { IoHome, IoPause, IoPlay } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import { Link, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
 import { getSpecificVideo } from "../Utils/FetchData";
 import Spinner from "./Spinner";
+
+import {
+  MdForward10,
+  MdFullscreen,
+  MdOutlineReplay10,
+  MdVolumeOff,
+  MdVolumeUp,
+} from "react-icons/md";
 
 const VideoPinDetail = () => {
   const textColor = useColorModeValue("gray.900", "gray.50");
@@ -123,6 +131,37 @@ const VideoPinDetail = () => {
                   </SliderTrack>
                   <SliderThumb boxSize={3} bg={"teal.300"} />
                 </Slider>
+
+                {/* Other Player Controls */}
+                <Flex width={"full"} alignItems="center" my={2} gap={10}>
+                  <MdOutlineReplay10
+                    fontSize={30}
+                    color={"#f1f1f1"}
+                    cursor="pointer"
+                  />
+
+                  <Box>
+                    {!isPlaying ? (
+                      <IoPlay
+                        fontSize={30}
+                        color="#f2f2f2"
+                        cursor={"pointer"}
+                      />
+                    ) : (
+                      <IoPause
+                        fontSize={30}
+                        color="#f2f2f2"
+                        cursor={"pointer"}
+                      />
+                    )}
+                  </Box>
+
+                  <MdForward10
+                    fontSize={30}
+                    color={"#f1f1f1"}
+                    cursor="pointer"
+                  />
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
