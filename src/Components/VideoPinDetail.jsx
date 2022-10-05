@@ -45,7 +45,7 @@ const format = (seconds) => {
     // 01:02:32
   }
 
-  return `${mm}: ${ss}`;
+  return `${mm}:${ss}`;
   // 02:33
 };
 
@@ -119,6 +119,9 @@ const VideoPinDetail = () => {
   const duration = playerRef.current
     ? playerRef.current.getDuration()
     : "00:00";
+
+  const elapsedTime = format(currentTime);
+  const totalDuration = format(duration);
 
   if (isLoading) return <Spinner />;
 
@@ -293,13 +296,13 @@ const VideoPinDetail = () => {
                   {/* Duration */}
                   <Flex alignItems={"center"} gap={2}>
                     <Text fontSize={16} color="whitesmoke">
-                      00:00
+                      {elapsedTime}
                     </Text>
                     <Text fontSize={16} color="whitesmoke">
                       /
                     </Text>
                     <Text fontSize={16} color="whitesmoke">
-                      00:00
+                      {totalDuration}
                     </Text>
                   </Flex>
                   <Image src={logo} width={"120px"} ml="auto" />
