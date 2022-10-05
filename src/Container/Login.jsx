@@ -60,6 +60,7 @@ const Login = () => {
             leftIcon={<FcGoogle fontSize={25} />}
             colorScheme={"whiteAlpha"}
             shadow={"lg"}
+            color="#f1f1f1"
             onClick={() => {
               handleLogin();
             }}

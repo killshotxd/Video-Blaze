@@ -53,3 +53,18 @@ export const getSpecificVideo = async (firestoreDb, videoId) => {
 export const deleteVideo = async (firestoreDb, videoId) => {
   await deleteDoc(doc(firestoreDb, "videos", videoId));
 };
+
+// Fetch Recommended Videos
+
+export const recommendedFeed = async (firestoreDb, categoryId, videoId) => {
+  const feeds = await getDocs(
+    query(
+      collection(firestoreDb, "videos"),
+      where("category", "==", categoryId),
+      where("id", "!=", videoId),
+      orderBy("id", "desc")
+    )
+  );
+
+  return feeds.docs.map((doc) => doc.data());
+};

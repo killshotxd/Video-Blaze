@@ -21,7 +21,12 @@ import { FcApproval } from "react-icons/fc";
 import ReactPlayer from "react-player";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { firebaseApp } from "../firebase-config";
-import { deleteVideo, getSpecificVideo, getUserInfo } from "../Utils/FetchData";
+import {
+  deleteVideo,
+  getSpecificVideo,
+  getUserInfo,
+  recommendedFeed,
+} from "../Utils/FetchData";
 import Spinner from "./Spinner";
 import {
   Popover,
@@ -46,6 +51,7 @@ import logo from "../assets/logo.png";
 import screenfull from "screenfull";
 import moment from "moment";
 import { fetchUser } from "../utils/fetchUser";
+import RecommendedVideos from "./RecommendedVideos";
 
 // Duration format
 const format = (seconds) => {
@@ -98,6 +104,11 @@ const VideoPinDetail = () => {
       setIsLoading(true);
       getSpecificVideo(firestoreDb, videoId).then((data) => {
         setVideoInfo(data);
+
+        recommendedFeed(firestoreDb, data.category, videoId).then((feed) =>
+          setFeeds(feed)
+        );
+
         getUserInfo(firestoreDb, data.userId).then((user) => {
           setUserInfo(user);
         });
@@ -182,8 +193,8 @@ const VideoPinDetail = () => {
         </Text>
       </Flex>
       {/* Main grid for Video */}
-      <Grid templateColumns="repeat(3, 1fr)" gap={2} width="100%">
-        <GridItem width={"100%"} colSpan="2">
+      <Grid templateColumns="repeat(4, 1fr)" gap={2} width="100%">
+        <GridItem width={"100%"} colSpan="3">
           <Flex
             width={"full"}
             bg="black"
@@ -432,11 +443,35 @@ const VideoPinDetail = () => {
                     </PopoverContent>
                   </Popover>
                 )}
+
+                <a
+                  href={videoInfo.videoUrl}
+                  download
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Button
+                    colorScheme={"whatsapp"}
+                    rounded="full"
+                    my={2}
+                    mt="0"
+                    width={"48"}
+                  >
+                    Free Download
+                  </Button>
+                </a>
               </Flex>
             </Flex>
           )}
         </GridItem>
       </Grid>
+      {feeds && (
+        <Flex direction={"column"} width="full" my={6}>
+          <Text my={4} fontSize={25} fontWeight="semibold">
+            Recommended Videos
+          </Text>
+          <RecommendedVideos feeds={feeds} />
+        </Flex>
+      )}
     </Flex>
   );
 };
