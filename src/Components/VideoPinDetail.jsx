@@ -8,6 +8,7 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  Image,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -27,6 +28,7 @@ import {
   MdVolumeOff,
   MdVolumeUp,
 } from "react-icons/md";
+import logo from "../assets/logo.png";
 
 const VideoPinDetail = () => {
   const textColor = useColorModeValue("gray.900", "gray.50");
@@ -188,7 +190,43 @@ const VideoPinDetail = () => {
                         />
                       )}
                     </Box>
+
+                    <Slider
+                      aria-label="slider-ex-1"
+                      defaultValue={30}
+                      min={0}
+                      max={100}
+                      size="sm"
+                      width={16}
+                      mx={2}
+                    >
+                      <SliderTrack bg={"teal.50"}>
+                        <SliderFilledTrack bg={"teal.300"} />
+                      </SliderTrack>
+                      <SliderThumb boxSize={2} bg={"teal.300"} />
+                    </Slider>
                   </Flex>
+
+                  {/* Duration */}
+                  <Flex alignItems={"center"} gap={2}>
+                    <Text fontSize={16} color="whitesmoke">
+                      00:00
+                    </Text>
+                    <Text fontSize={16} color="whitesmoke">
+                      /
+                    </Text>
+                    <Text fontSize={16} color="whitesmoke">
+                      00:00
+                    </Text>
+                  </Flex>
+                  <Image src={logo} width={"120px"} ml="auto" />
+
+                  <MdFullscreen
+                    fontSize={30}
+                    color="#f1f1f1"
+                    cursor={"pointer"}
+                    onClick={() => {}}
+                  />
                 </Flex>
               </Flex>
             </Flex>
