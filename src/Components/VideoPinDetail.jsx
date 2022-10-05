@@ -31,6 +31,7 @@ import {
 } from "react-icons/md";
 import logo from "../assets/logo.png";
 import screenfull from "screenfull";
+import moment from "moment";
 
 // Duration format
 const format = (seconds) => {
@@ -366,8 +367,17 @@ const VideoPinDetail = () => {
                     </Text>
                     <FcApproval />
                   </Flex>
+                  {videoInfo?.id && (
+                    <Text fontSize={12}>
+                      {moment(
+                        new Date(parseInt(videoInfo.id)).toISOString()
+                      ).fromNow()}
+                    </Text>
+                  )}
                 </Flex>
               </Flex>
+
+              {/* Action Buttons */}
             </Flex>
           )}
         </GridItem>
