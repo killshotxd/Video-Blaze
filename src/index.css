@@ -21,6 +21,12 @@ body::-webkit-scrollbar {
   .css-1vkmudn {
     margin-left: 1rem !important;
   }
+  .css-1y6fads {
+    height: auto !important;
+  }
+  .css-ky3en7 {
+    height: 180px !important;
+  }
 }
 
 @media screen and (max-width: 700px) {

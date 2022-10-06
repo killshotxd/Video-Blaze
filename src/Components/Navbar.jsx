@@ -1,7 +1,5 @@
 import React from "react";
 
-import logo from "../assets/logo.png";
-import logo_dark from "../assets/logo_dark.png";
 import {
   IoAdd,
   IoLogoGithub,
@@ -47,9 +45,9 @@ const Navbar = ({ user }) => {
         <IoLogoGithub fontSize={40} /> Killshotxd
       </a>
 
-      <Link to={"/"}>
+      {/* <Link to={"/"}>
         <Image src={colorMode == "light" ? logo_dark : logo} width={"180px"} />
-      </Link>
+      </Link> */}
 
       {/* <InputGroup mx={6} width={"60vw"}>
         <InputLeftAddon children={<IoSearch fontSize={25} />} />
